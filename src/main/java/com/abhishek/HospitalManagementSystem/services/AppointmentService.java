@@ -34,9 +34,10 @@ public class AppointmentService {
 
     public Appointment updateAppointment(Long id, Appointment updatedAppointment) {
         Appointment existing = getAppointmentById(id);
-        existing.setPatientId(updatedAppointment.getPatientId());
-        existing.setDoctorId(updatedAppointment.getDoctorId());
+        existing.setPatient(updatedAppointment.getPatient());
+        existing.setDoctor(updatedAppointment.getDoctor());
         existing.setDate(updatedAppointment.getDate());
+
         return appointmentRepository.save(existing);
     }
     public List<Appointment> getAppointmentsByDoctor(Long doctorId) {
