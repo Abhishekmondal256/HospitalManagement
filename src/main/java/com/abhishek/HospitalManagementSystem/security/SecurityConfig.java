@@ -55,7 +55,13 @@ public class SecurityConfig {
                         .requestMatchers("/api/admin/login").permitAll()
                         // Admin-only endpoints
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        // Doctors endpoints
+                          .requestMatchers("/api/v1/appointments/doctor/**")
+                       .hasAnyRole("ADMIN", "DOCTOR")
+
+                        // All other appointment APIs → must be authenticated
+                     .requestMatchers("/api/v1/appointments/**")
+                      .authenticated()
+                                       // Doctors endpoints
                         .requestMatchers("/api/v1/doctors/**").hasRole("ADMIN")
                         // Patients endpoints
                         .requestMatchers("/api/v1/patients/**").hasAnyRole("ADMIN", "DOCTOR")
