@@ -1,11 +1,13 @@
 package com.abhishek.HospitalManagementSystem.services;
 
 import com.abhishek.HospitalManagementSystem.models.Appointment;
+import com.abhishek.HospitalManagementSystem.models.Patient;
 import com.abhishek.HospitalManagementSystem.repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentService {
@@ -36,5 +38,15 @@ public class AppointmentService {
         existing.setDoctorId(updatedAppointment.getDoctorId());
         existing.setDate(updatedAppointment.getDate());
         return appointmentRepository.save(existing);
+    }
+    public List<Appointment> getAppointmentsByDoctor(Long doctorId) {
+        return appointmentRepository.findByDoctorId(doctorId);
+    }
+    public List<Patient> getPatientsByDoctor(Long doctorId) {
+        return appointmentRepository.findByDoctorId(doctorId)
+                .stream()
+                .map(Appointment::getPatient)
+                .distinct()
+                .collect(Collectors.toList());
     }
 }

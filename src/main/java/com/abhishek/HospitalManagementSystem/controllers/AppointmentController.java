@@ -1,5 +1,6 @@
 package com.abhishek.HospitalManagementSystem.controllers;
 
+import com.abhishek.HospitalManagementSystem.models.Patient;
 import com.abhishek.HospitalManagementSystem.services.AppointmentService;
 import com.abhishek.HospitalManagementSystem.models.Appointment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,13 @@ public class AppointmentController {
     @PutMapping("/{id}")
     public Appointment updateAppointment(@PathVariable Long id, @RequestBody Appointment appointment) {
         return appointmentService.updateAppointment(id, appointment);
+    }
+    @GetMapping("/doctor/{doctorId}")
+    public List<Appointment> getAppointmentsByDoctor(@PathVariable Long doctorId) {
+        return appointmentService.getAppointmentsByDoctor(doctorId);
+    }
+    @GetMapping("/doctor/{doctorId}/patients")
+    public List<Patient> getPatientsByDoctor(@PathVariable Long doctorId) {
+        return appointmentService.getPatientsByDoctor(doctorId);
     }
 }
