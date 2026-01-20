@@ -1,13 +1,9 @@
 package com.abhishek.HospitalManagementSystem;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+@SpringBootApplication
+public class HospitalManagementSystemApplication {
 
-@SpringBootTest
-class HospitalManagementSystemApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(HospitalManagementSystemApplication.class, args);
+    }
 }
